@@ -157,7 +157,7 @@ while run:
     if display_tip:
         tip = text_font.render("[Choose the Target Block (    ) from your inventory]", False, WHITE)
         win.blit(tip, (440, 590))
-        win.blit(target_block, (MAXWIDTH//2 + 48, 590))
+        win.blit(target_block, (MAXWIDTH//2 - 20, 597))
         
     for i in range(8):
         win.blit(items[i], (positions[i], OBJECT_COORD_Y))

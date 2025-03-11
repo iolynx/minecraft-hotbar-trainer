@@ -50,11 +50,11 @@ achieved = True
 
 if os.path.isfile(cwd + 'config.txt'):
     with open(cwd + 'config.txt') as f:
-        lines = f.read(9)
-    keybinds = list(lines)
+        keybinds = f.read().split(';')[:9]
 else:
     keybinds = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
 
+print('Keybinds: ', keybinds)
 key_pressed = ord('1')
 slotter = random.randint(0, 8) 
 streak = 0
@@ -91,28 +91,30 @@ while run:
         if event.type == pygame.QUIT:
             run = False
         if event.type == pygame.KEYDOWN:
-            if str(event.key) == str(ord(keybinds[0])):
+            print('You Pressed: ', pygame.key.name(event.key))
+            print('---')
+            if pygame.key.name(event.key) == keybinds[0]:
                 x_coord = 578
-            elif str(event.key) == str(ord(keybinds[1])):
+            elif pygame.key.name(event.key) == keybinds[1]:
                 x_coord = 618
-            elif str(event.key) == str(ord(keybinds[2])):
+            elif pygame.key.name(event.key) == keybinds[2]:
                 x_coord = 658
-            elif str(event.key) == str(ord(keybinds[3])):
+            elif pygame.key.name(event.key) == keybinds[3]:
                 x_coord = 698
-            elif str(event.key) == str(ord(keybinds[4])):
+            elif pygame.key.name(event.key) == keybinds[4]:
                 x_coord = 738
-            elif str(event.key) == str(ord(keybinds[5])):
+            elif pygame.key.name(event.key) == keybinds[5]:
                 x_coord = 778
-            elif str(event.key) == str(ord(keybinds[6])):
+            elif pygame.key.name(event.key) == keybinds[6]:
                 x_coord = 818
-            elif str(event.key) == str(ord(keybinds[7])):
+            elif pygame.key.name(event.key) == keybinds[7]:
                 x_coord = 858
-            elif str(event.key) == str(ord(keybinds[8])):
+            elif pygame.key.name(event.key) == keybinds[8]:
                 x_coord = 898
             else: 
                 break
 
-            key_pressed = str(event.key)
+            key_pressed = pygame.key.name(event.key)
 
     win.fill(BLACK)
 
@@ -131,7 +133,7 @@ while run:
         achieved = False
         display_tip = False
     else:
-        if chr(int(key_pressed)) == keybinds[slotter]:
+        if key_pressed == keybinds[slotter]:
             achieved = True
             countdown = max(48, 150 - streak * 2)
             if not streak_is_dead:
